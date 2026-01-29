@@ -1,0 +1,397 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zamora vaciada</title>
+  <meta name="description" content="Prototipo en HTML/CSS/JS con scrollytelling, termómetro de despoblación embebido desde Flourish y mapa animado con Mapbox." />
+
+  <!-- Mapbox GL JS -->
+  <link href="mapbox-gl.css" rel="stylesheet" />
+  <script src="mapbox-gl.js"></script>
+  
+  <!-- Mapbox GL JS Plugins para controles adicionales -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mapbox/mapbox-gl-geocoder@4.7.0/dist/mapbox-gl-geocoder.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@mapbox/mapbox-gl-geocoder@4.7.0/dist/mapbox-gl-geocoder.min.js"></script>
+
+  <!-- Scrollama para scrollytelling -->
+  <script src="https://unpkg.com/scrollama"></script>
+
+  <!-- GSAP para animaciones suaves -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#story">Saltar al contenido principal</a>
+  <header class="hero" role="banner">
+    <div class="hero__inner">
+      <h1>Zamora en riesgo: ¿Podemos revertir la despoblación?</h1>
+      <p class="lead">Narrativa interactiva sobre cómo afecta la despoblación a Zamora.</p>
+      <a class="btn btn--primary" href="#story">Comenzar</a>
+    </div>
+  </header>
+
+  <!-- Contenedor principal del scrollytelling -->
+  <main id="story" class="scrolly" role="main" aria-label="Narrativa interactiva">
+    <!-- Panel fijo (sticky) a la derecha: mapa de referencia estático -->
+    <aside class="figure" aria-label="Mapa de referencia">
+      <div class="map-reference" role="group" aria-labelledby="map-reference-title" aria-describedby="map-reference-subtitle map-reference-hint">
+        <h3 id="map-reference-title">Pérdida poblacional 1960–2020</h3>
+        <p id="map-reference-subtitle" class="map-reference__subtitle">Municipios con datos disponibles</p>
+        <p id="map-reference-hint" class="map-reference__hint">Pasa el cursor para ver detalles</p>
+        <div id="map-reference-container" class="map-reference__container" role="img" aria-label="Mapa de Zamora con pérdida poblacional por municipio"></div>
+        <div class="map-reference__legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #2a9d8f;"></div>
+            <span>Estable / Crecimiento</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #d4a574;"></div>
+            <span>Pérdida moderada</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #e76f51;"></div>
+            <span>Zona crítica</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Columna de texto con pasos -->
+    <section class="article">
+      <div class="step" data-step="intro" data-center="-6.36,41.64" data-zoom="7.4" role="region" aria-labelledby="step-intro-title">
+        <h2 id="step-intro-title">Un territorio que se apaga</h2>
+        <p>En gran parte de España, el silencio ha ido ganando terreno. Donde antes había escuelas llenas, bares ruidosos y plazas con vida, hoy quedan ventanas cerradas y calles que se vacían al caer la tarde.</p>
+<p>Zamora es uno de esos lugares donde el tiempo parece avanzar más rápido que la gente. Cada año pierde habitantes, servicios y oportunidades. No es un fenómeno nuevo, pero sí uno que empieza a marcar el futuro de toda una provincia.</p>
+<p>En esta historia te propongo recorrer ese camino: entender cómo hemos llegado hasta aquí, qué está pasando ahora y, sobre todo, qué podría pasar si decidimos actuar… o si no hacemos algo.</p>     
+<p class="hint">Desplázate para activar el mapa →</p>
+        <img src="zamora.jpg" alt="Zamora paisaje" />
+      </div>
+
+      <div class="step" data-step="thermo" data-center="-6.20,41.29" data-zoom="7.3" role="region" aria-labelledby="step-thermo-title">
+        <h2 id="step-thermo-title">Midiendo el pulso de la despoblación</h2>
+        <p>Para entender la despoblación no basta con mirar cuánta gente vive en un sitio. Hay señales que cuentan mucho más.</p>
+        <p>La densidad, por ejemplo, nos dice si un territorio está lleno de vida o si empieza a quedarse hueco. El envejecimiento muestra si hay relevo generacional o si la población se apoya cada vez más en personas mayores. Y la migración revela si la gente llega… o si se marcha.</p>
+        <p>Este indicador reúne esas señales en un solo vistazo. No es un número frío: es una forma de medir el pulso de la provincia. Y como verás, en muchos municipios ese pulso late cada vez más despacio.</p>
+        <img src="Escuela abandonada.jpg"  alt="Escuela abandonada" /> 
+        <!-- Termómetro embebido con Flourish -->
+        <div id="thermo" style="width: 100%; height: 600px; margin-top: 1.5rem;" role="img" aria-label="Termómetro de despoblación">
+          <div class="flourish-embed" data-src="story/3566718" style="width: 100%; height: 100%;"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/story/3566718/thumbnail" width="100%" alt="Termómetro de despoblación" /></noscript></div>
+        </div>
+      </div>
+
+      <div class="step" data-step="timeline" data-center="-6.73,42.04" data-zoom="7.2" role="region" aria-labelledby="step-timeline-title">
+  <h2 id="step-timeline-title">Así hemos llegado hasta aquí</h2>
+  <p>
+    Si miramos atrás, la historia de Zamora es la historia de muchas zonas rurales de España.
+  </p>
+  <p>
+    En los años 60, los pueblos estaban llenos de vida. La agricultura y la ganadería sostenían a miles de familias, 
+    y la mayoría de la población vivía en el territorio. Pero poco a poco, el trabajo se concentró en las ciudades, 
+    y con él se fueron los jóvenes.
+  </p>
+  <p>
+    Como si el territorio perdiera brillo, los puntos se van desaturando y bajando en el gráfico a medida que su población cae con el paso del tiempo. Menos nacimientos, más envejecimiento, más casas vacías.
+  </p>
+  <p>
+    Este recorrido animado muestra esa transformación. No es solo una línea que baja: es la historia de cómo un 
+    territorio cambió en apenas dos generaciones.
+  </p>
+  
+
+  <!-- Aquí insertamos tu scatter animado -->
+  <div class="flourish-embed flourish-scatter" role="img" aria-label="Evolución de población de municipios de Zamora en el tiempo"
+       data-src="visualisation/27362978"
+       style="width:100%; height: 500px; margin-top:0.3rem;">
+    <script src="https://public.flourish.studio/resources/embed.js"></script>
+    <noscript>
+      <img src="https://public.flourish.studio/visualisation/27362978/thumbnail" 
+           width="100%" 
+           alt="scatter visualization" />
+    </noscript>
+  </div>
+  <div class="video-wrapper" style="width:100%; margin-top: 1.5rem; margin-bottom: 0;">
+    <iframe src="https://secure-embed.rtve.es/drmn/embed/video/5944585" 
+            title="Combatir el éxodo rural y defender la vida de pueblo en España" 
+            style="width:100%; height:500px; border:none;" 
+            allowfullscreen="allowfullscreen"
+            aria-label="Vídeo sobre el éxodo rural">
+    </iframe>
+  </div>
+</div>
+
+
+      <div class="step" data-step="scenarios" data-center="-5.67,42.00" data-zoom="7.2" role="region" aria-labelledby="step-scenarios-title">
+        <h2 id="step-scenarios-title">¿Y ahora qué?</h2>
+        <p>El futuro no está escrito. Y eso es una buena noticia.</p>
+<p>En 2040, Zamora podría seguir perdiendo población… o podría empezar a recuperarla. Todo depende de las decisiones que tomemos hoy.</p>
+<p>Aquí puedes explorar tres caminos posibles:
+  <ul>
+    <li><strong>Sin intervención:</strong> la tendencia continúa y muchos municipios seguirán vaciándose.</li>
+    <li><strong>Escenario moderado:</strong> se aplican políticas de apoyo, mejora de servicios y conectividad. La caída se frena.</li>
+    <li><strong>Escenario agresivo:</strong> se apuesta fuerte por la repoblación, la digitalización y la economía rural. Algunos municipios vuelven a crecer.</li>
+  </ul>
+<p>No son predicciones exactas, sino una forma de imaginar qué podría pasar si cambiamos —o no cambiamos— el rumbo.</p>
+        <div class="controls" role="group" aria-label="Selecciona un escenario">
+          <button class="btn active" type="button" data-scenario="base" aria-pressed="true" aria-controls="scenario-base">Sin intervención</button>
+          <button class="btn" type="button" data-scenario="moderado" aria-pressed="false" aria-controls="scenario-moderado">Políticas moderadas</button>
+          <button class="btn" type="button" data-scenario="agresivo" aria-pressed="false" aria-controls="scenario-agresivo">Políticas agresivas</button>
+        </div>
+        <div id="scenarios" style="width: 100%; height: 600px; margin-top: 1.5rem; position: relative;" role="region" aria-label="Escenarios de futuro">
+          <!-- Escenario 1: Sin intervención -->
+          <div class="scenario-embed active" id="scenario-base" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;" role="img" aria-label="Escenario sin intervención" aria-hidden="false">
+            <div class="flourish-embed" data-src="visualisation/27366398" style="width: 100%; height: 100%;"></div>
+          </div>
+          
+          <!-- Escenario 2: Políticas moderadas -->
+          <div class="scenario-embed" id="scenario-moderado" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: none;" role="img" aria-label="Escenario con políticas moderadas" aria-hidden="true">
+            <div class="flourish-embed" data-src="visualisation/27366327" style="width: 100%; height: 100%;"></div>
+          </div>
+          
+          <!-- Escenario 3: Políticas agresivas -->
+          <div class="scenario-embed" id="scenario-agresivo" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: none;" role="img" aria-label="Escenario con políticas agresivas" aria-hidden="true">
+            <div class="flourish-embed" data-src="visualisation/27366282" style="width: 100%; height: 100%;"></div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="step" data-step="cta" data-center="-5.90,41.63" data-zoom="7.4" role="region" aria-labelledby="step-cta-title">
+        <h2 id="step-cta-title">El futuro está en nuestras manos.</h2>
+        <p> La despoblación no es un destino inevitable. Es una tendencia que podemos cambiar si entendemos sus causas y actuamos con decisión. </p> 
+        <p> Cada política, cada inversión y cada proyecto puede marcar la diferencia entre un territorio que se apaga y otro que vuelve a encenderse. </p> 
+        <p> Tú también puedes opinar. ¿Qué camino crees que funcionaría mejor? </p>
+        <img src="mercado.jpg" alt="Mercado" />
+        <div class="poll" role="group" aria-label="Encuesta sobre escenarios">
+          <button class="btn btn--ghost" type="button" data-vote="base" aria-pressed="false">Sin intervención</button>
+          <button class="btn btn--ghost" type="button" data-vote="moderado" aria-pressed="false">Moderadas</button>
+          <button class="btn btn--ghost" type="button" data-vote="agresivo" aria-pressed="false">Agresivas</button>
+          <details id="pollResults" class="poll__results">
+            <summary>Ver resultados de la encuesta</summary>
+            <div id="resultsContent" class="results-content" role="status" aria-live="polite" aria-atomic="true">
+              <p>Cargando resultados...</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <p>Prototipo educativo © 2025. 
+    </p>
+  <p>
+
+    Datos procedentes del
+
+    <a href="https://www.ine.es">Instituto Nacional de Estadística (INE)</a>
+
+    y del
+
+    <a href="https://www.ign.esInstituto"> Geográfico Nacional (IGN)</a>.
+
+    Reutilización bajo licencia
+
+    <a href="https://creativecommons.org/licenses/by/4.0/CC">Creative Commons BY 4.0</a>.
+
+    Fuente: INE y IGN.
+
+  </p>
+
+  <p>
+    Vídeo: <a href="https://www.rtve.es/rtve/20150608/aviso-legal/1168221.shtml">RTVE Play (aviso legal)</a>.
+    Imágenes: <a href="https://pixabay.com/service/license/">Pixabay (licencia)</a>.
+  </p>
+
+  </footer>
+
+  <!-- Cargar Flourish una sola vez -->
+  <script src="https://public.flourish.studio/resources/embed.js"></script>
+
+  <script>
+    // === CONFIGURACIÓN DE MAPBOX ===
+    // Sustituye con tu token para ver el mapa real.
+    window.MAPBOX_TOKEN = "pk.eyJ1Ijoib2dtNyIsImEiOiJjbWllZGNla3MwMWEyM2ZxdjM4bzR3emYwIn0.OQV-uhj8T_QBDMGU76ZYjg"; // <-- pon tu token aquí
+
+    // === CONTROL DE BOTONES PARA EL STORY DE FLOURISH ===
+    document.addEventListener('DOMContentLoaded', function() {
+      const scenarioButtons = document.querySelectorAll('.controls .btn');
+      const scenarioEmbeds = document.querySelectorAll('.scenario-embed');
+
+      // Esperar un poco a que Flourish se haya inicializado
+      setTimeout(function() {
+        if (window.Flourish && window.Flourish.createEmbeds) {
+          window.Flourish.createEmbeds();
+        }
+      }, 500);
+
+      scenarioButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const scenario = this.getAttribute('data-scenario');
+          
+          // Ocultar todos los embeds
+          scenarioEmbeds.forEach(embed => {
+            embed.style.display = 'none';
+            embed.classList.remove('active');
+            embed.setAttribute('aria-hidden', 'true');
+          });
+          
+          // Mostrar el embed seleccionado
+          const selectedEmbed = document.getElementById(`scenario-${scenario}`);
+          if (selectedEmbed) {
+            selectedEmbed.style.display = 'block';
+            selectedEmbed.classList.add('active');
+            selectedEmbed.setAttribute('aria-hidden', 'false');
+          }
+          
+          // Marcar el botón como activo
+          scenarioButtons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+          });
+          this.classList.add('active');
+          this.setAttribute('aria-pressed', 'true');
+        });
+      });
+
+      // === SISTEMA DE VOTACIÓN CON LOCALSTORAGE ===
+      const pollButtons = document.querySelectorAll('.poll .btn[data-vote]');
+      const pollResults = document.getElementById('pollResults');
+      const resultsContent = document.getElementById('resultsContent');
+
+      // Cargar resultados al inicio
+      cargarResultados();
+
+      pollButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const escenario = this.getAttribute('data-vote');
+          
+          // Obtener votos actuales de localStorage
+          const votos = JSON.parse(localStorage.getItem('encuesta_votos') || '{"base": 0, "moderado": 0, "agresivo": 0}');
+          
+          // Incrementar el voto
+          votos[escenario]++;
+          
+          // Guardar de nuevo en localStorage
+          localStorage.setItem('encuesta_votos', JSON.stringify(votos));
+          
+          // Mostrar resultados actualizados
+          mostrarResultados(votos);
+          pollResults.open = true; // Abrir el details automáticamente
+          
+          // Deshabilitar botones temporalmente
+          pollButtons.forEach(btn => {
+            btn.disabled = true;
+            btn.setAttribute('aria-disabled', 'true');
+            btn.setAttribute('aria-pressed', 'false');
+          });
+          this.setAttribute('aria-pressed', 'true');
+          setTimeout(() => {
+            pollButtons.forEach(btn => {
+              btn.disabled = false;
+              btn.setAttribute('aria-disabled', 'false');
+            });
+          }, 1000);
+        });
+      });
+
+      function cargarResultados() {
+        const votos = JSON.parse(localStorage.getItem('encuesta_votos') || '{"base": 0, "moderado": 0, "agresivo": 0}');
+        mostrarResultados(votos);
+      }
+
+      function mostrarResultados(votos) {
+        const total = votos.base + votos.moderado + votos.agresivo;
+        
+        let escenarioGanador = 'base';
+        let votos_ganador = votos.base;
+        
+        if (votos.moderado > votos_ganador) {
+          escenarioGanador = 'moderado';
+          votos_ganador = votos.moderado;
+        }
+        
+        if (votos.agresivo > votos_ganador) {
+          escenarioGanador = 'agresivo';
+          votos_ganador = votos.agresivo;
+        }
+        
+        const escenarios = {
+          base: {
+            titulo: 'Sin intervención',
+            descripcion: 'La tendencia continúa y muchos municipios seguirán vaciándose.',
+            color: '#2a9d8f'
+          },
+          moderado: {
+            titulo: 'Escenario moderado',
+            descripcion: 'Se aplican políticas de apoyo, mejora de servicios y conectividad. La caída se frena.',
+            color: '#e76f51'
+          },
+          agresivo: {
+            titulo: 'Escenario agresivo',
+            descripcion: 'Se apuesta fuerte por la repoblación, la digitalización y la economía rural. Algunos municipios vuelven a crecer.',
+            color: '#f4a261'
+          }
+        };
+        
+        const ganador = escenarios[escenarioGanador];
+        
+        const porcentajes = {
+          base: total > 0 ? ((votos.base / total) * 100).toFixed(1) : 0,
+          moderado: total > 0 ? ((votos.moderado / total) * 100).toFixed(1) : 0,
+          agresivo: total > 0 ? ((votos.agresivo / total) * 100).toFixed(1) : 0
+        };
+        
+        const html = `
+          <div style="display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem;">
+            <div style="padding: 1.2rem; background: rgba(${ganador.color === '#2a9d8f' ? '42, 157, 143' : ganador.color === '#e76f51' ? '231, 111, 81' : '244, 162, 97'}, 0.15); border-left: 4px solid ${ganador.color}; border-radius: 0.6rem;">
+              <h4 style="margin: 0 0 0.6rem 0; color: ${ganador.color}; font-size: 1.1rem;">
+                📊 ${ganador.titulo} está ganando
+              </h4>
+              <p style="margin: 0; color: var(--fg); line-height: 1.6;">
+                ${ganador.descripcion}
+              </p>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+              <p style="margin: 0.5rem 0; font-size: 0.9rem; color: var(--muted); text-align: center;">Desglose de votos:</p>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Sin intervención:</span>
+                <strong style="color: #2a9d8f;">${porcentajes.base}%</strong>
+              </div>
+              <div style="width: 100%; background: rgba(42, 157, 143, 0.2); border-radius: 4px; height: 6px;">
+                <div style="width: ${porcentajes.base}%; background: #2a9d8f; border-radius: 4px; height: 100%;"></div>
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Políticas moderadas:</span>
+                <strong style="color: #e76f51;">${porcentajes.moderado}%</strong>
+              </div>
+              <div style="width: 100%; background: rgba(231, 111, 81, 0.2); border-radius: 4px; height: 6px;">
+                <div style="width: ${porcentajes.moderado}%; background: #e76f51; border-radius: 4px; height: 100%;"></div>
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Políticas agresivas:</span>
+                <strong style="color: #f4a261;">${porcentajes.agresivo}%</strong>
+              </div>
+              <div style="width: 100%; background: rgba(244, 162, 97, 0.2); border-radius: 4px; height: 6px;">
+                <div style="width: ${porcentajes.agresivo}%; background: #f4a261; border-radius: 4px; height: 100%;"></div>
+              </div>
+            </div>
+            
+            <p style="text-align: center; margin: 0.5rem 0; color: var(--muted); font-size: 0.85rem;">
+              <strong>${total}</strong> voto${total !== 1 ? 's' : ''}
+            </p>
+          </div>
+        `;
+        resultsContent.innerHTML = html;
+      }
+    });
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
